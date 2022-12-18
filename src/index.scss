@@ -11,8 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.modal-dialog {
+.largemodal .modal-dialog {
   max-width: 1200px;
+}
+
+.form-control.error {
+  border-color: #dc3545;
 }
 
 /* btn */
@@ -59,6 +63,9 @@ code {
     th {font-size: 16px; line-height: 18px;}
   }
   td {line-height: 20px;}
+  td.max-100 {width: 180px;}
+  .badge-lang {margin: 0 2px 2px;}
+  th.small {font-size: 12px; line-height: 14px;}
 }
 
 /* trow */

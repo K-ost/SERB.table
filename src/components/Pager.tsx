@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { Spinner } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { setLoad, setPage, setRefresh } from "../store/appSlice"
+import { setPage, setRefresh } from "../store/appSlice"
 import { AppDispatch, RootState } from "../store/store"
 
 interface IPager {

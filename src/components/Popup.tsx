@@ -33,7 +33,7 @@ const Popup: React.FC = () => {
   }
 
   return (
-    <Modal show={popupOpen} onHide={closePopup} centered size="lg">
+    <Modal show={popupOpen} onHide={closePopup} centered className="largemodal">
       <Modal.Header closeButton>
         <Modal.Title>{info?.title}</Modal.Title>
       </Modal.Header>

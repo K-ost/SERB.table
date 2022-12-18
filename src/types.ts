@@ -32,3 +32,8 @@ export type DateType = {
   time: string
   smalldate: string
 }
+
+export type FormValues = {
+  category: string
+  url: string
+}

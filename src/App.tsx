@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import FormBox from './components/FormBox'
 import Pager from './components/Pager'
 import Popup from './components/Popup'
 import Trow from './components/Trow'
@@ -10,6 +11,7 @@ import { RowType } from './types'
 function App() {
   const visible = 3
   const [rows, setRows] = useState<RowType[]>([])
+  const [showForm, setShowForm] = useState<boolean>(false)
   const currentPage = useSelector((state: RootState) => state.app.page)
   const loading = useSelector((state: RootState) => state.app.loading)
   const dispatch = useDispatch<AppDispatch>()
@@ -31,8 +33,9 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app-header">
+      <div className="app-header d-flex align-items-center justify-content-between">
         <h1>Table</h1>
+        <button className="btn btn-warning" onClick={() => setShowForm(true)}>Add entry</button>
       </div>
       <div className="app-body">
 
@@ -42,13 +45,19 @@ function App() {
           <table className="table table-striped">
             <thead>
               <tr>
-                <th>Created On</th>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Domain</th>
-                <th>Days until expired</th>
-                <th>Indexed languages</th>
-                <th> Unindexed languages</th>
+                <th rowSpan={2}>Created On</th>
+                <th rowSpan={2}>Title</th>
+                <th rowSpan={2}>Category</th>
+                <th rowSpan={2}>Domain</th>
+                <th rowSpan={2}>Days until expired</th>
+                <th rowSpan={2}>Indexed languages</th>
+                <th rowSpan={2}>Unindexed languages</th>
+                <th colSpan={3}>Indexes</th>
+              </tr>
+              <tr>
+                <th className="small">indexed count</th>
+                <th className="small">indexed expired count</th>
+                <th className="small">indexed total</th>
               </tr>
             </thead>
             <tbody>
@@ -61,6 +70,7 @@ function App() {
       <div className="app-footer">
         <Pager visible={visible} />
         <Popup />
+        <FormBox show={showForm} hide={() => setShowForm(false)} />
       </div>
     </div>
   )

@@ -3,6 +3,7 @@ import useDate from "../date.hook"
 import { setCurrentID, setPopup } from "../store/appSlice"
 import { AppDispatch } from "../store/store"
 import { RowType } from "../types"
+import Lang from "./Lang"
 
 interface TrowInterface {
   el: RowType
@@ -36,8 +37,15 @@ const Trow: React.FC<TrowInterface> = ({ el }) => {
       <td><span className={`badge rounded-pill ${badgeClass}`}>{el.category}</span></td>
       <td>{el.domain}</td>
       <td className="date">{untilDate.smalldate}<br /> <small>{untilDate.time}</small></td>
+      <td className="max-100">
+        {totalIndexed > 0 && <Lang list={el.entries} />}
+      </td>
+      <td className="max-100">
+        {totalUnindexed > 0 && <Lang list={el.entries} />}
+      </td>
       <td>{totalIndexed}</td>
       <td>{totalUnindexed}</td>
+      <td>{el.entries.length}</td>
     </tr>
   )
 }
