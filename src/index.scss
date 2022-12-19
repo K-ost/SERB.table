@@ -89,4 +89,11 @@ code {
 }
 
 
+/* searchbox */
+.searchbox {
+  display: flex;
+  padding: 0 20px;
+  .input-group {max-width: 500px;}
+  select {max-width: 200px; cursor: pointer;}
+}
 

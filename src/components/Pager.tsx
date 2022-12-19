@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setPage, setRefresh } from "../store/appSlice"
+import { setPage, setRefresh, setTotal } from "../store/appSlice"
 import { AppDispatch, RootState } from "../store/store"
 
 interface IPager {
@@ -10,8 +10,8 @@ interface IPager {
 const Pager: React.FC<IPager> = ({ visible }) => {
   const page = useSelector((state: RootState) => state.app.page)
   const loading = useSelector((state: RootState) => state.app.loading)
+  const total = useSelector((state: RootState) => state.app.total)
   const dispatch = useDispatch<AppDispatch>()
-  const [total, setTotal] = useState<number>(1)
   const pagesCount = Math.ceil(total / visible)
   const pagesArray = []
 
@@ -24,9 +24,9 @@ const Pager: React.FC<IPager> = ({ visible }) => {
     if (page) {
       fetch(`https://serpindex-demo.svc.violetvault.com/api/Index`)
         .then(response => response.json())
-        .then(data => setTotal(data.length))
+        .then(data => dispatch(setTotal(data.length)))
     }
-  }, [page])
+  }, [page, dispatch])
 
   return (
     <nav className="d-flex align-items-center">

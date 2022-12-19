@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import FormBox from './components/FormBox'
 import Pager from './components/Pager'
 import Popup from './components/Popup'
+import SearchLine from './components/SearchLine'
 import Trow from './components/Trow'
 import { setLoad } from './store/appSlice'
 import { AppDispatch, RootState } from './store/store'
@@ -14,13 +15,14 @@ function App() {
   const [showForm, setShowForm] = useState<boolean>(false)
   const currentPage = useSelector((state: RootState) => state.app.page)
   const loading = useSelector((state: RootState) => state.app.loading)
+  const filter = useSelector((state: RootState) => state.app.filter)
   const dispatch = useDispatch<AppDispatch>()
 
 
   // Fetching rows
   useEffect(() => {
     if (loading) {
-      fetch(`https://serpindex-demo.svc.violetvault.com/api/Index?Count=${visible}&Page=${currentPage}`)
+      fetch(`https://serpindex-demo.svc.violetvault.com/api/Index?Count=${visible}&Page=${currentPage}${filter}`)
         .then(response => response.json())
         .then(data => {
           setRows(data)
@@ -28,7 +30,7 @@ function App() {
         })
         .catch(error => console.error(error))
     }
-  }, [loading, currentPage, dispatch])
+  }, [loading, currentPage, dispatch, filter])
 
 
   return (
@@ -39,7 +41,9 @@ function App() {
       </div>
       <div className="app-body">
 
-        {!rows.length ? <p>Loading...</p> :
+        <SearchLine />
+
+        {loading ? <p>Loading...</p> :
         <>
 
           <table className="table table-striped">
@@ -62,6 +66,9 @@ function App() {
             </thead>
             <tbody>
               {rows.map(row => <Trow key={row.id} el={row} />)}
+              {!rows.length && <tr>
+                <td colSpan={10}>Not found</td>
+              </tr>}
             </tbody>
           </table>
         </>}

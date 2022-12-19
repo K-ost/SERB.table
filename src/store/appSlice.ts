@@ -5,13 +5,17 @@ export interface appState {
   page: number
   popupOpen: boolean
   currentID: string
+  filter: string
+  total: number
 }
 
 const initialState: appState = {
   loading: true,
   page: 1,
   popupOpen: false,
-  currentID: ''
+  currentID: '',
+  filter: '',
+  total: 0
 }
 
 export const appSlice = createSlice({
@@ -38,10 +42,23 @@ export const appSlice = createSlice({
       state.currentID = ''
       state.loading = true
       state.page = 1
+    },
+    setFilter: (state, action) => {
+      if (action.payload === 'full') {
+        state.filter = '&FullIndexed=true'
+      } else if (action.payload === 'notfull') {
+        state.filter = '&FullIndexed=false'
+      } else {
+        state.filter = ''
+      }
+      state.loading = true
+    },
+    setTotal: (state, action) => {
+      state.total = action.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setPage, setLoad, setPopup, setCurrentID, clearData, setRefresh } = appSlice.actions
+export const { setPage, setLoad, setPopup, setCurrentID, clearData, setRefresh, setFilter, setTotal } = appSlice.actions
 export default appSlice.reducer
