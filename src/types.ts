@@ -31,6 +31,7 @@ export type DateType = {
   date: string
   time: string
   smalldate: string
+  expiredDate: number
 }
 
 export type FormValues = {

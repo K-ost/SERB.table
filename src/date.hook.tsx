@@ -2,18 +2,23 @@ import { DateType } from "./types"
 
 const useDate = (data: any): DateType => {
   const months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novermber', 'December']
-  
   const fullDate = new Date(data)
-  const currentMonth: string = months[fullDate.getMonth()]
-  const simpleDay = (fullDate.getDate() < 10) ? '0' + fullDate.getDate() : fullDate.getDate()
-  const simpleMonth = (fullDate.getMonth() < 10) ? '0' + fullDate.getMonth() : fullDate.getMonth()
-  const minutes = (fullDate.getMinutes() < 10) ? '0' + fullDate.getMinutes() : fullDate.getMinutes()
   
-  const date: string = `${currentMonth} ${fullDate.getDate()}, ${fullDate.getFullYear()}`
-  const smalldate: string = simpleDay + '.' + simpleMonth + '.' + fullDate.getFullYear()
-  const time: string = `${fullDate.getHours()}:${minutes}`
+  let currentMonth: string = months[fullDate.getMonth()]
+  let simpleDay = (fullDate.getDate() < 10) ? '0' + fullDate.getDate() : fullDate.getDate()
+  let simpleMonth = (fullDate.getMonth() < 10) ? '0' + (fullDate.getMonth() + 1) : fullDate.getMonth() + 1
+  let minutes = (fullDate.getMinutes() < 10) ? '0' + fullDate.getMinutes() : fullDate.getMinutes()
   
-  return { date, time, smalldate }
+  let date: string = `${currentMonth} ${fullDate.getDate()}, ${fullDate.getFullYear()}`
+  let smalldate: string = simpleDay + '.' + simpleMonth + '.' + fullDate.getFullYear()
+  let time: string = `${fullDate.getHours()}:${minutes}`
+
+  // Getting expired date
+  const currentDate = new Date()
+  const dateUntil = new Date(data)
+  const expiredDate = Math.ceil(Math.ceil(dateUntil.getTime() - currentDate.getTime()) / (1000 * 3600 * 24))
+  
+  return { date, time, smalldate, expiredDate }
 }
 
 export default useDate

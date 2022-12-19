@@ -30,6 +30,10 @@ const Trow: React.FC<TrowInterface> = ({ el }) => {
   let totalUnindexed = el.entries.length - totalIndexed
 
 
+  // Date
+  const { expiredDate } = useDate(el.validUntil)
+
+
   // trowClass
   const trowClass = (totalIndexed === el.entries.length) ? 'trow fully-indexed' :
                     (totalUnindexed === el.entries.length) ? 'trow unindexed' : 'trow'
@@ -40,7 +44,7 @@ const Trow: React.FC<TrowInterface> = ({ el }) => {
       <td><b>{el.title}</b></td>
       <td><span className={`badge rounded-pill ${badgeClass}`}>{el.category}</span></td>
       <td>{el.domain}</td>
-      <td className="date">{untilDate.smalldate}<br /> <small>{untilDate.time}</small></td>
+      <td className="date">{(expiredDate > 0) ? expiredDate : 'expired'}</td>
       <td className="max-100">
         {totalIndexed > 0 && <Lang list={el.entries} />}
       </td>
