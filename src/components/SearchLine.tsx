@@ -16,7 +16,7 @@ const SearchLine: React.FC = () => {
     e.preventDefault()
     let str1 = domain && '&Domain=' + domain
     let str2 = cat && '&Category=' + cat
-    let str3 = search && '&Search=' + search
+    let str3 = search && '&Search=%' + search
     let str4 = url && '&Url=' + url
     //let str5 = created && '&CreatedAfter=' + created
     let str = str1 + str2 + str3 + str4
