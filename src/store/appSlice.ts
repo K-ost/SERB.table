@@ -9,6 +9,7 @@ export interface appState {
   total: number
   search: string
   notice: string
+  clearField: boolean
 }
 
 const initialState: appState = {
@@ -19,7 +20,8 @@ const initialState: appState = {
   filter: '',
   total: 0,
   search: '',
-  notice: ''
+  notice: '',
+  clearField: false
 }
 
 export const appSlice = createSlice({
@@ -52,6 +54,7 @@ export const appSlice = createSlice({
       state.filter = ''
       state.search = ''
       state.notice = ''
+      state.clearField = true
     },
     setFilter: (state, action) => {
       if (action.payload === 'full') {
@@ -68,10 +71,13 @@ export const appSlice = createSlice({
     },
     setSearched: (state, action) => {
       state.search = action.payload
+    },
+    setClear: (state) => {
+      state.clearField = false
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setPage, setLoad, setPopup, setCurrentID, clearData, setRefresh, setFilter, setTotal, setSearched, setNotice } = appSlice.actions
+export const { setPage, setLoad, setPopup, setCurrentID, clearData, setRefresh, setFilter, setTotal, setSearched, setNotice, setClear } = appSlice.actions
 export default appSlice.reducer

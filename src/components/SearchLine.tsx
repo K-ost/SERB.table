@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { setFilter, setLoad, setSearched } from "../store/appSlice"
 import { AppDispatch } from "../store/store"
+import SearchInput from "./SearchInput"
 
 const SearchLine: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -9,7 +10,6 @@ const SearchLine: React.FC = () => {
   const [cat, setCat] = useState<string>('')
   const [search, setSearch] = useState<string>('')
   const [url, setUrl] = useState<string>('')
-  // const [created, setCreated] = useState<string>('')
 
   // searchFunc
   const searchFunc = (e: any) => {
@@ -18,7 +18,6 @@ const SearchLine: React.FC = () => {
     let str2 = cat && '&Category=' + cat
     let str3 = search && '&Search=%' + search + '%'
     let str4 = url && '&Url=' + url
-    //let str5 = created && '&CreatedAfter=' + created
     let str = str1 + str2 + str3 + str4
     dispatch(setSearched(str))
     dispatch(setLoad(true))
@@ -28,10 +27,10 @@ const SearchLine: React.FC = () => {
     <div className="searchbox">
       <form onSubmit={searchFunc}>
         <div className="input-group">
-          <input type="text" className="form-control" placeholder="Domain" onChange={e => setDomain(e.target.value)} />
-          <input type="text" className="form-control" placeholder="Category" onChange={e => setCat(e.target.value)} />
-          <input type="text" className="form-control" placeholder="Search" onChange={e => setSearch(e.target.value)} />
-          <input type="text" className="form-control" placeholder="Url" onChange={e => setUrl(e.target.value)} />
+          <SearchInput place="Domain" handler={e => setDomain(e.target.value)} />
+          <SearchInput place="Category" handler={e => setCat(e.target.value)} />
+          <SearchInput place="Search" handler={e => setSearch(e.target.value)} />
+          <SearchInput place="Url" handler={e => setUrl(e.target.value)} />
           <input type="text" className="form-control" placeholder="Created After" />
           <button className="btn btn-warning" type="submit">Search</button>
         </div>

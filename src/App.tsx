@@ -6,7 +6,7 @@ import Pager from './components/Pager'
 import Popup from './components/Popup'
 import SearchLine from './components/SearchLine'
 import Trow from './components/Trow'
-import { setLoad } from './store/appSlice'
+import { setClear, setLoad } from './store/appSlice'
 import { AppDispatch, RootState } from './store/store'
 import { RowType } from './types'
 
@@ -29,6 +29,7 @@ function App() {
         .then(data => {
           setRows(data)
           dispatch(setLoad(false))
+          dispatch(setClear())
         })
         .catch(error => console.error(error))
     }
