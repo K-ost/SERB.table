@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { Toast, ToastContainer } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormBox from './components/FormBox'
+import Notify from './components/Notify'
 import Pager from './components/Pager'
 import Popup from './components/Popup'
 import SearchLine from './components/SearchLine'
@@ -79,6 +81,7 @@ function App() {
         <Pager visible={visible} />
         <Popup />
         <FormBox show={showForm} hide={() => setShowForm(false)} />
+        <Notify />
       </div>
     </div>
   )

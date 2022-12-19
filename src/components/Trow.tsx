@@ -11,7 +11,6 @@ interface TrowInterface {
 
 const Trow: React.FC<TrowInterface> = ({ el }) => {
   const createDate = useDate(el.createdOn)
-  const untilDate = useDate(el.validUntil)
   const dispatch = useDispatch<AppDispatch>()
 
   const badgeClass = (el.category === 'Learning') ? 'bg-warning text-dark' : 'bg-secondary'

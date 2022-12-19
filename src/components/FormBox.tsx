@@ -1,6 +1,9 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { setLoad, setNotice } from '../store/appSlice'
+import { AppDispatch } from '../store/store'
 import { FormValues } from '../types'
 import InputField from './InputField'
 
@@ -10,6 +13,7 @@ interface IFormBox {
 }
 
 const FormBox: React.FC<IFormBox> = ({ hide, show }) => {
+  const dispatch = useDispatch<AppDispatch>()
   
   // Form state
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>()
@@ -25,9 +29,16 @@ const FormBox: React.FC<IFormBox> = ({ hide, show }) => {
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(newEntry)
     })
-    console.log(response)
-    reset()
-    hide()
+
+    if (response.status === 201) {
+      dispatch(setNotice(`Line with ${data.category} had been added`))
+      dispatch(setLoad(true))
+      reset()
+      hide()
+    } else {
+      dispatch(setNotice(`Server error`))
+      console.log(response)
+    }
   }
   
 
