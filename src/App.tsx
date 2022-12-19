@@ -57,7 +57,7 @@ function App() {
                 <th rowSpan={2}>Days until expired</th>
                 <th rowSpan={2}>Indexed languages</th>
                 <th rowSpan={2}>Unindexed languages</th>
-                <th colSpan={3}>Indexes</th>
+                <th colSpan={3}>Indexed</th>
               </tr>
               <tr>
                 <th className="small">indexed count</th>

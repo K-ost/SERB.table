@@ -29,7 +29,12 @@ const Trow: React.FC<TrowInterface> = ({ el }) => {
   }, 0)
   let totalUnindexed = el.entries.length - totalIndexed
 
+  // indexed counts
+  let indexedCount: number = el.entries.reduce((acum: number, el) => acum += el.indexedCount, 0)
+  let indexedValidCount: number = el.entries.reduce((acum: number, el) => acum += el.indexedValidCount, 0)
+  let indexedTotal: number = el.entries.reduce((acum: number, el) => acum += el.indexedTotal, 0)
 
+  
   // Date
   const { expiredDate } = useDate(el.validUntil)
 
@@ -51,9 +56,9 @@ const Trow: React.FC<TrowInterface> = ({ el }) => {
       <td className="max-100">
         {totalUnindexed > 0 && <Lang list={el.entries} />}
       </td>
-      <td>{totalIndexed}</td>
-      <td>{totalUnindexed}</td>
-      <td>{totalIndexed}</td>
+      <td>{indexedCount}</td>
+      <td>{indexedValidCount}</td>
+      <td>{indexedTotal}</td>
     </tr>
   )
 }
