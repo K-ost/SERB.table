@@ -7,9 +7,13 @@ const SearchLine: React.FC = () => {
 
   return (
     <div className="searchbox">
-      <div className="input-group me-3">
-        <input type="text" className="form-control" placeholder="Search..." />
-        <button className="btn btn-outline-primary" type="submit">Search</button>
+      <div className="input-group">
+        <input type="text" className="form-control" placeholder="Domain" />
+        <input type="text" className="form-control" placeholder="Category" />
+        <input type="text" className="form-control" placeholder="Search" />
+        <input type="text" className="form-control" placeholder="Url" />
+        <input type="text" className="form-control" placeholder="CreatedAfter" />
+        <button className="btn btn-warning" type="submit">Search</button>
       </div>
       <select className="form-select" onChange={e => dispatch(setFilter(e.target.value))}>
         <option value="all">All</option>
