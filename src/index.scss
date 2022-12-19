@@ -66,6 +66,14 @@ code {
   td.max-100 {width: 180px;}
   .badge-lang {margin: 0 2px 2px;}
   th.small {font-size: 12px; line-height: 14px;}
+
+  tr {
+    &.unindexed {background: #fff3cd;}
+    &.partial-indexed {background: #f1f1f1;}
+    &.fully-indexed {background: #d1e7dd;}
+    &.partial-expired {background: #fecba1;}
+    &.fully-expired {background: #f8d7da;}
+  }
 }
 
 /* trow */

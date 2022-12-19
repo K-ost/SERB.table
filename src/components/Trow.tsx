@@ -28,10 +28,14 @@ const Trow: React.FC<TrowInterface> = ({ el }) => {
     return acum += el.indexedTotal
   }, 0)
   let totalUnindexed = el.entries.length - totalIndexed
-  
+
+
+  // trowClass
+  const trowClass = (totalIndexed === el.entries.length) ? 'trow fully-indexed' :
+                    (totalUnindexed === el.entries.length) ? 'trow unindexed' : 'trow'
   
   return (
-    <tr onClick={() => clickRow(el.id)} className="trow">
+    <tr onClick={() => clickRow(el.id)} className={trowClass}>
       <td className="date">{createDate.smalldate}<br /> <small>{createDate.time}</small></td>
       <td><b>{el.title}</b></td>
       <td><span className={`badge rounded-pill ${badgeClass}`}>{el.category}</span></td>
@@ -45,7 +49,7 @@ const Trow: React.FC<TrowInterface> = ({ el }) => {
       </td>
       <td>{totalIndexed}</td>
       <td>{totalUnindexed}</td>
-      <td>{el.entries.length}</td>
+      <td>{totalIndexed}</td>
     </tr>
   )
 }
