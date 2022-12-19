@@ -22,7 +22,7 @@ function App() {
   // Fetching rows
   useEffect(() => {
     if (loading) {
-      fetch(`https://serpindex-demo.svc.violetvault.com/api/Index?Count=${visible}&Page=${currentPage}${filter}`)
+      fetch(`https://serpindex-demo.svc.violetvault.com/api/Index?Count=${visible}&Page=${currentPage}${filter && `&${filter}`}`)
         .then(response => response.json())
         .then(data => {
           setRows(data)

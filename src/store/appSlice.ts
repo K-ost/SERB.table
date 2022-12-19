@@ -45,9 +45,9 @@ export const appSlice = createSlice({
     },
     setFilter: (state, action) => {
       if (action.payload === 'full') {
-        state.filter = '&FullIndexed=true'
+        state.filter = 'FullIndexed=true'
       } else if (action.payload === 'notfull') {
-        state.filter = '&FullIndexed=false'
+        state.filter = 'FullIndexed=false'
       } else {
         state.filter = ''
       }
