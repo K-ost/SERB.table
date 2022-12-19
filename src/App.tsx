@@ -16,13 +16,14 @@ function App() {
   const currentPage = useSelector((state: RootState) => state.app.page)
   const loading = useSelector((state: RootState) => state.app.loading)
   const filter = useSelector((state: RootState) => state.app.filter)
+  const search = useSelector((state: RootState) => state.app.search)
   const dispatch = useDispatch<AppDispatch>()
 
 
   // Fetching rows
   useEffect(() => {
     if (loading) {
-      fetch(`https://serpindex-demo.svc.violetvault.com/api/Index?Count=${visible}&Page=${currentPage}${filter && `&${filter}`}`)
+      fetch(`https://serpindex-demo.svc.violetvault.com/api/Index?Count=${visible}&Page=${currentPage}${filter}${search}`)
         .then(response => response.json())
         .then(data => {
           setRows(data)
@@ -30,7 +31,7 @@ function App() {
         })
         .catch(error => console.error(error))
     }
-  }, [loading, currentPage, dispatch, filter])
+  }, [loading, currentPage, dispatch, filter, search])
 
 
   return (

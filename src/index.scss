@@ -95,7 +95,7 @@ code {
   padding: 0 20px 20px;
   margin-bottom: 10px;
   border-bottom: 1px solid #ededed;
-  .input-group {width: 100%; margin-right: 10px;}
-  select {cursor: pointer; width: 140px;}
+  form, .input-group {width: 100%;}
+  select {cursor: pointer; width: 140px; margin-left: 10px;}
 }
 

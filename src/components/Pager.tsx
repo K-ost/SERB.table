@@ -12,6 +12,7 @@ const Pager: React.FC<IPager> = ({ visible }) => {
   const loading = useSelector((state: RootState) => state.app.loading)
   const total = useSelector((state: RootState) => state.app.total)
   const filter = useSelector((state: RootState) => state.app.filter)
+  const search = useSelector((state: RootState) => state.app.search)
   const dispatch = useDispatch<AppDispatch>()
   const pagesCount = Math.ceil(total / visible)
   const pagesArray = []
@@ -24,11 +25,11 @@ const Pager: React.FC<IPager> = ({ visible }) => {
   // Fetching rows
   useEffect(() => {
     if (page) {
-      fetch(`https://serpindex-demo.svc.violetvault.com/api/Index${filter && `?${filter}`}`)
+      fetch(`https://serpindex-demo.svc.violetvault.com/api/Index?Page=1${filter}${search}`)
         .then(response => response.json())
         .then(data => dispatch(setTotal(data.length)))
     }
-  }, [page, dispatch, filter])
+  }, [page, dispatch, filter, search])
 
   return (
     <nav className="d-flex align-items-center">
