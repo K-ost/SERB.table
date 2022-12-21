@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
@@ -14,6 +14,7 @@ interface IFormBox {
 
 const FormBox: React.FC<IFormBox> = ({ hide, show }) => {
   const dispatch = useDispatch<AppDispatch>()
+  const [date, setDate] = useState<string>('')
   
   // Form state
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>()
@@ -22,8 +23,10 @@ const FormBox: React.FC<IFormBox> = ({ hide, show }) => {
   const onSubmit = async (data: any) => {
     const newEntry = {
       ...data,
-      validUntil: new Date()
+      validUntil: date,
+      //validUntil: new Date()
     }
+    console.log(newEntry)
     const response = await fetch('https://serpindex-demo.svc.violetvault.com/api/Index', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
@@ -59,6 +62,9 @@ const FormBox: React.FC<IFormBox> = ({ hide, show }) => {
             func={register("url", {required: 'This field should not be empty', maxLength: 80})}
             placeholder="URL"
           />
+          <div className="mb-3">
+            <input type="datetime-local" className="form-control" placeholder="Created after" onChange={e => setDate(e.target.value)} />
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <button className="btn btn-outline-secondary" onClick={hide}>Cancel</button>
